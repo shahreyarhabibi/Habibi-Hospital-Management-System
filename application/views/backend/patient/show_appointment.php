@@ -43,7 +43,6 @@
             <div class="panel-body" style="padding:0px;">
                 <div class="calendar-env">
                     <div class="calendar-body">
-                        <div id="notice_calendar"></div>
                     </div>
                 </div>
             </div>

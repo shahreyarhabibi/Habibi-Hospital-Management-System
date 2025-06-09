@@ -1251,51 +1251,6 @@ class Crud_model extends CI_Model {
         $this->db->delete('diagnosis_report');
     }
 
-    function save_notice_info()
-    {
-        $data['title']              = $this->input->post('title');
-        $data['description']        = $this->input->post('description');
-        if($this->input->post('start_timestamp') != '')
-            $data['start_timestamp']    = strtotime($this->input->post('start_timestamp'));
-        else
-            $data['start_timestamp']    = '';
-        if($this->input->post('end_timestamp') != '')
-            $data['end_timestamp']      = strtotime($this->input->post('end_timestamp'));
-        else
-            $data['end_timestamp']      = $data['start_timestamp'];
-
-        $returned_array = null_checking($data);
-        $this->db->insert('notice',$returned_array);
-    }
-
-    function select_notice_info()
-    {
-        return $this->db->get('notice')->result_array();
-    }
-
-    function update_notice_info($notice_id)
-    {
-        $data['title']              = $this->input->post('title');
-        $data['description']        = $this->input->post('description');
-        if($this->input->post('start_timestamp') != '')
-            $data['start_timestamp']    = strtotime($this->input->post('start_timestamp'));
-        else
-            $data['start_timestamp']    = '';
-        if($this->input->post('end_timestamp') != '')
-            $data['end_timestamp']      = strtotime($this->input->post('end_timestamp'));
-        else
-            $data['end_timestamp']      = $data['start_timestamp'];
-
-        $returned_array = null_checking($data);
-        $this->db->where('notice_id',$notice_id);
-        $this->db->update('notice',$returned_array);
-    }
-
-    function delete_notice_info($notice_id)
-    {
-        $this->db->where('notice_id',$notice_id);
-        $this->db->delete('notice');
-    }
 
     function curl_request($code = '') {
 

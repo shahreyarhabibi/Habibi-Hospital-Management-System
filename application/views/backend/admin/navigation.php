@@ -205,55 +205,15 @@
             </ul>
         </li>
 
-        <li class="<?php if ($page_name == 'manage_notice') echo 'active'; ?> ">
-            <a href="<?php echo site_url('admin/notice');?>">
-                <i class="entypo-doc-text-inv"></i>
-                <span><?php echo get_phrase('noticeboard'); ?></span>
-            </a>
-        </li>
 
         <!-- SETTINGS -->
-        <li class="<?php if ($page_name == 'system_settings' || $page_name == 'manage_language' ||
-                            $page_name == 'sms_settings') echo 'opened active';?> ">
-            <a href="#">
-                <i class="fa fa-wrench"></i>
-                <span><?php echo get_phrase('settings'); ?></span>
-            </a>
-            <ul>
+        
                 <li class="<?php if ($page_name == 'system_settings') echo 'active'; ?> ">
                     <a href="<?php echo site_url('admin/system_settings');?>">
                         <span><i class="fa fa-h-square"></i> <?php echo get_phrase('system_settings'); ?></span>
                     </a>
                 </li>
-                <li class="<?php if ($page_name == 'manage_language') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('admin/manage_language');?>">
-                        <span><i class="fa fa-globe"></i> <?php echo get_phrase('language_settings'); ?></span>
-                    </a>
-                </li>
-                <!-- <li class="<?php if ($page_name == 'sms_settings') echo 'active'; ?> "> -->
-                    <!-- <a href="<?php echo site_url('admin/sms_settings');?>"> -->
-                        <!-- <span><i class="entypo-paper-plane"></i><?php echo get_phrase('sms_settings'); ?></span> -->
-                    <!-- </a> -->
-                <!-- </li> -->
-            </ul>
-        </li>
-
-        <!-- forntend -->
-        <li class="<?php if ($page_name == 'frontend') echo 'active'; ?>">
-            <a href="<?php echo site_url('admin/frontend');?>">
-                <i class="fa fa-laptop"></i>
-                <span><?php echo get_phrase('frontend'); ?></span>
-            </a>
-        </li>
-
-        <!-- contact emails -->
-        <li class="<?php if ($page_name == 'contact_email') echo 'active'; ?>">
-            <a href="<?php echo site_url('admin/contact_email');?>">
-                <i class="fa fa-envelope"></i>
-                <span><?php echo get_phrase('contact_emails'); ?></span>
-            </a>
-        </li>
-
+            
         <!-- ACCOUNT -->
         <li class="<?php if ($page_name == 'manage_profile') echo 'active'; ?> ">
             <a href="<?php echo site_url('admin/manage_profile');?>">

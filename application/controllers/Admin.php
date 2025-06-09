@@ -589,36 +589,7 @@ class Admin extends CI_Controller
         $data['page_title'] = get_phrase('death_report');
         $this->load->view('backend/index', $data);
     }
-    
-    function notice($task = "", $notice_id = "")
-    {
-        if ($this->session->userdata('admin_login') != 1) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect(site_url(), 'refresh');
-        }
-        
-        if ($task == "create") {
-            $this->crud_model->save_notice_info();
-            $this->session->set_flashdata('message', get_phrase('notice_info_saved_successfuly'));
-            redirect(site_url('admin/notice'), 'refresh');
-        }
-        
-        if ($task == "update") {
-            $this->crud_model->update_notice_info($notice_id);
-            $this->session->set_flashdata('message', get_phrase('notice_info_updated_successfuly'));
-            redirect(site_url('admin/notice'), 'refresh');
-        }
-        
-        if ($task == "delete") {
-            $this->crud_model->delete_notice_info($notice_id);
-            redirect(site_url('admin/notice'), 'refresh');
-        }
-        
-        $data['notice_info'] = $this->crud_model->select_notice_info();
-        $data['page_name']   = 'manage_notice';
-        $data['page_title']  = get_phrase('noticeboard');
-        $this->load->view('backend/index', $data);
-    }
+
     
     // PAYROLL
     function payroll()
