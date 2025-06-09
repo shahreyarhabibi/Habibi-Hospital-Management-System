@@ -12,9 +12,6 @@ class Doctor extends CI_Controller
         $this->load->database();
         $this->load->library('session');
         $this->load->model('crud_model');
-        $this->load->model('email_model');
-        $this->load->model('sms_model');
-        $this->load->model('frontend_model');
     }
     
     function index()
@@ -410,31 +407,5 @@ class Doctor extends CI_Controller
         $this->load->view('backend/index', $page_data);
     }
     
-    function send_sms($message = '', $reciever_phone = '')
-    {
-        
-        
-        //$to = "[\"<$reciever_phone>\"]";
-        echo $to = $reciever_phone;
-        echo $text = $message;
-        $authToken = "ZaD9vMp5S3imW39pM77PEg==";
-        
-        $ch = curl_init();
-        
-        curl_setopt($ch, CURLOPT_URL, "https://api.clickatell.com/rest/message");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"text\":\"$text\",\"to\":$to}");
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "X-Version: 1",
-            "Content-Type: application/json",
-            "Accept: application/json",
-            "Authorization: Bearer $authToken"
-        ));
-        
-        $result = curl_exec($ch);
-        
-        echo $result;
-    }
     
 }

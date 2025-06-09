@@ -17,9 +17,6 @@ class Admin extends CI_Controller
         $this->load->database();
         $this->load->library('session');
         $this->load->model('crud_model');
-        $this->load->model('email_model');
-        $this->load->model('sms_model');
-        $this->load->model('frontend_model');
         
         // cache control
         $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
@@ -61,18 +58,7 @@ class Admin extends CI_Controller
         if ($param1 == 'edit_phrase') {
             $page_data['edit_profile'] = $param2;
         }
-        // if ($param1 == 'update_phrase') {
-        //     $language     = $param2;
-        //     $total_phrase = $this->input->post('total_phrase');
-        //     for ($i = 1; $i < $total_phrase; $i++) {
-        //         //$data[$language]    =    $this->input->post('phrase').$i;
-        //         $this->db->where('phrase_id', $i);
-        //         $this->db->update('language', array(
-        //             $language => $this->input->post('phrase' . $i)
-        //         ));
-        //     }
-        //     redirect(site_url('admin/manage_language/edit_phrase/' . $language), 'refresh');
-        // }
+    
         if ($param1 == 'do_update') {
             $language        = $this->input->post('language');
             $data[$language] = $this->input->post('phrase');
@@ -110,7 +96,6 @@ class Admin extends CI_Controller
         }
         $page_data['page_name']  = 'manage_language';
         $page_data['page_title'] = get_phrase('manage_language');
-        //$page_data['language_phrases'] = $this->db->get('language')->result_array();
         $this->load->view('backend/index', $page_data);
     }
 
@@ -142,26 +127,6 @@ class Admin extends CI_Controller
         $page_data['page_name']  = 'system_settings';
         $page_data['page_title'] = get_phrase('system_settings');
         $page_data['settings']   = $this->db->get('settings')->result_array();
-        $this->load->view('backend/index', $page_data);
-    }
-    
-    // SMS settings.
-    function sms_settings($param1 = '')
-    {
-        
-        if ($this->session->userdata('admin_login') != 1) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect(site_url(), 'refresh');
-        }
-        
-        if ($param1 == 'do_update') {
-            $this->crud_model->update_sms_settings();
-            $this->session->set_flashdata('message', get_phrase('settings_updated'));
-            redirect(site_url('admin/sms_settings'), 'refresh');
-        }
-        
-        $page_data['page_name']  = 'sms_settings';
-        $page_data['page_title'] = get_phrase('sms_settings');
         $this->load->view('backend/index', $page_data);
     }
     
@@ -695,146 +660,4 @@ class Admin extends CI_Controller
         $page_data['page_title'] = get_phrase('payroll_list');
         $this->load->view('backend/index', $page_data);
     }
-    
-    // forntend management
-    function frontend($param1 = '', $param2 = '', $param3 = '')
-    {
-        if ($this->session->userdata('admin_login') != 1) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect(site_url(), 'refresh');
-        }
-        
-        if ($param1 == '' || $param1 == 'home_page') {
-            $page_data['inner_page']      = 'frontend_home_page';
-            $page_data['sliders']         = $this->frontend_model->get_frontend_settings('slider');
-            $page_data['welcome_content'] = $this->frontend_model->get_frontend_settings('homepage_welcome_section');
-        }
-        
-        if ($param1 == 'about_us') {
-            $page_data['inner_page'] = 'frontend_about_us';
-        }
-        
-        if ($param1 == 'blog') {
-            $page_data['inner_page'] = 'frontend_blog';
-            $page_data['blogs']      = $this->frontend_model->get_blogs();
-        }
-        
-        if ($param1 == 'blog_new') {
-            $page_data['inner_page'] = 'frontend_blog_new';
-        }
-        
-        if ($param1 == 'blog_edit') {
-            $page_data['blog']       = $this->frontend_model->get_blog_details($param2);
-            $page_data['inner_page'] = 'frontend_blog_edit';
-        }
-        
-        if ($param1 == 'service') {
-            $page_data['inner_page'] = 'frontend_service';
-            $page_data['service']    = $this->frontend_model->get_frontend_settings('service_section');
-            $page_data['services']   = $this->frontend_model->get_services();
-        }
-        
-        if ($param1 == 'settings') {
-            $page_data['inner_page'] = 'frontend_settings';
-        }
-        
-        $page_data['page_name']  = 'frontend';
-        $page_data['page_title'] = get_phrase('manage_hospital_website');
-        $this->load->view('backend/index', $page_data);
-    }
-    
-    // update frontend settings
-    function frontend_settings($param1 = '', $param2 = '', $param3 = '')
-    {
-        if ($this->session->userdata('admin_login') != 1) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect(site_url(), 'refresh');
-        }
-        
-        if ($param1 == 'slider') {
-            $this->frontend_model->update_slider();
-            $this->session->set_flashdata('message', get_phrase('changes_saved_successfully'));
-            redirect(site_url('admin/frontend/home_page'), 'refresh');
-        }
-        
-        if ($param1 == 'welcome_section') {
-            $this->frontend_model->update_welcome_section_content();
-            $this->session->set_flashdata('message', get_phrase('changes_saved_successfully'));
-            redirect(site_url('admin/frontend/home_page'), 'refresh');
-        }
-        
-        if ($param1 == 'service_section') {
-            $this->frontend_model->update_service_section();
-            $this->session->set_flashdata('message', get_phrase('changes_saved_successfully'));
-            redirect(site_url('admin/frontend/service'), 'refresh');
-        }
-        
-        if ($param1 == 'service_new') {
-            $this->frontend_model->add_new_service();
-            $this->session->set_flashdata('message', get_phrase('service_saved_successfully'));
-            redirect(site_url('admin/frontend/service'), 'refresh');
-        }
-        
-        if ($param1 == 'service_edit') {
-            $this->frontend_model->update_service($param2);
-            $this->session->set_flashdata('message', get_phrase('service_updated_successfully'));
-            redirect(site_url('admin/frontend/service'), 'refresh');
-        }
-        
-        if ($param1 == 'service_delete') {
-            $this->frontend_model->delete_service($param2);
-            $this->session->set_flashdata('message', get_phrase('service_deleted_successfully'));
-            redirect(site_url('admin/frontend/service'), 'refresh');
-        }
-        
-        if ($param1 == 'blog_new') {
-            $this->frontend_model->add_new_blog();
-            $this->session->set_flashdata('message', get_phrase('blogpost_saved_successfully'));
-            redirect(site_url('admin/frontend/blog'), 'refresh');
-        }
-        
-        if ($param1 == 'blog_edit') {
-            $this->frontend_model->update_blog($param2);
-            $this->session->set_flashdata('message', get_phrase('changes_saved_successfully'));
-            redirect(site_url('admin/frontend/blog'), 'refresh');
-        }
-        
-        if ($param1 == 'blog_delete') {
-            $this->frontend_model->delete_blog($param2);
-            $this->session->set_flashdata('message', get_phrase('blog_deleted'));
-            redirect(site_url('admin/frontend/blog'), 'refresh');
-        }
-        
-        if ($param1 == 'about_us') {
-            $this->frontend_model->update_about_us();
-            $this->session->set_flashdata('message', get_phrase('data_updated'));
-            redirect(site_url('admin/frontend/about_us'), 'refresh');
-        }
-        
-        if ($param1 == 'settings') {
-            $this->frontend_model->update_frontend_settings();
-            $this->session->set_flashdata('message', get_phrase('changes_saved_successfully'));
-            redirect(site_url('admin/frontend/settings'), 'refresh');
-        }
-    }
-    
-    function contact_email($param1 = '', $param2 = '')
-    {
-        if ($this->session->userdata('admin_login') != 1) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect(site_url(), 'refresh');
-        }
-        
-        if ($param1 == 'delete') {
-            $this->db->where('contact_email_id', $param2);
-            $this->db->delete('contact_email');
-            $this->session->set_flashdata('message', get_phrase('email_deleted'));
-            redirect(site_url('admin/contact_email'), 'refresh');
-        }
-        
-        $page_data['page_name']      = 'contact_email';
-        $page_data['page_title']     = get_phrase('contact_emails');
-        $page_data['contact_emails'] = $this->frontend_model->get_contact_emails();
-        $this->load->view('backend/index', $page_data);
-    }
-} 
+}  
