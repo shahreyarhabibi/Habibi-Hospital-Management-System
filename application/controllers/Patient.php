@@ -12,6 +12,9 @@ class Patient extends CI_Controller
         $this->load->database();
         $this->load->library('session');
         $this->load->model('crud_model');
+        $this->load->model('email_model');
+        $this->load->model('email_model');
+
     }
     
     function index()

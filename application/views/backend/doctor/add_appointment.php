@@ -40,12 +40,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <div class="col-sm-7 col-sm-offset-3">
-                            <input type="checkbox" id="notify" name="notify" value="checked" checked>
-                            <label class="control-label" for="notify"><?php echo get_phrase('notify_patient_with_') . 'SMS'; ?></label>
-                        </div>
-                    </div>
+                  
 
                     <div class="col-sm-3 control-label col-sm-offset-2">
                         <button type="submit" class="btn btn-success">

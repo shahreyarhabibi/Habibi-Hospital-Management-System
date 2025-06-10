@@ -15,6 +15,8 @@ class Login extends CI_Controller
     {
         parent::__construct();
         $this->load->model('crud_model');
+        $this->load->model('email_model');
+
         $this->load->database();
         $this->load->library('session');
         /* cache control */

@@ -11,7 +11,7 @@ class Accountant extends CI_Controller
         parent::__construct();
         $this->load->database();
         $this->load->library('session');
-        
+        $this->load->model('email_model');
         $this->load->model('crud_model');
     }
     

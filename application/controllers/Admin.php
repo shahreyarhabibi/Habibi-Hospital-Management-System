@@ -10,13 +10,24 @@ if (!defined('BASEPATH'))
 
 class Admin extends CI_Controller
 {
-    
+    public $benchmark;
+            public $hooks;
+            public $config;
+            public $log;
+            public $utf8;
+            public $uri;
+            public $exceptions;
+            public $router;
+            public $output;
+
     function __construct()
     {
         parent::__construct();
         $this->load->database();
         $this->load->library('session');
         $this->load->model('crud_model');
+        $this->load->model('email_model');
+
         
         // cache control
         $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
@@ -35,16 +46,51 @@ class Admin extends CI_Controller
     
     // ADMIN DASHBOARD
     
-    function dashboard()
-    {
+    function dashboard() {
         if ($this->session->userdata('admin_login') != 1) {
             $this->session->set_userdata('last_page', current_url());
             redirect(site_url(), 'refresh');
         }
-        $page_data['page_name']  = 'dashboard';
+    
+        // Total patients (existing)
+        $page_data['total_patients'] = $this->db->count_all('patient');
+    
+        // Current day
+        $current_day_start = date('Y-m-d 00:00:00');
+        $current_day_end = date('Y-m-d 23:59:59');
+    
+        // Previous day
+        $previous_day_start = date('Y-m-d 00:00:00', strtotime('-1 day'));
+        $previous_day_end = date('Y-m-d 23:59:59', strtotime('-1 day'));
+    
+        // Patients in current day
+        $page_data['current_day_count'] = $this->db
+            ->where('created_at >=', $current_day_start)
+            ->where('created_at <=', $current_day_end)
+            ->count_all_results('patient');
+    
+        // Patients in previous day
+        $page_data['previous_day_count'] = $this->db
+            ->where('created_at >=', $previous_day_start)
+            ->where('created_at <=', $previous_day_end)
+            ->count_all_results('patient');
+    
+        // Calculate difference
+        $page_data['patient_difference'] = $page_data['current_day_count'] - $page_data['previous_day_count'];
+    
+        // Calculate percentage change (with zero-division protection)
+        $page_data['percentage_change'] = ($page_data['previous_day_count'] > 0)
+            ? (round(($page_data['patient_difference'] / $page_data['previous_day_count']) * 100, 1))
+            : ($page_data['current_day_count'] > 0 ? 100 : 0);
+    
+        $page_data['page_name'] = 'dashboard';
         $page_data['page_title'] = get_phrase('admin_dashboard');
+    
         $this->load->view('backend/index', $page_data);
     }
+    
+    
+    
     
     // LANGUAGE SETTINGS
     

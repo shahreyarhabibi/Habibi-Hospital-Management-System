@@ -3,6 +3,74 @@
  * Apply Here your Custom CSS
  *
 */
+.card-custom {
+    width: 100%;
+    border-radius: 2rem;
+    border: 1px solid #0f766e;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    color: #6c757d; /* Bootstrap's text-secondary */
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-icon {
+    font-size: 1.8rem;
+    margin-right: 0.8rem;
+    position: relative;
+    top: 2px;
+}
+
+.card-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.card-count {
+    font-weight: 800;
+    font-size: 4rem;
+    color: #000;
+    line-height: 1;
+}
+
+.card-badge {
+    background-color: #d1f3ed;
+    color: #0f766e;
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    margin-top: 7px;
+    align-self: flex-start;
+}
+
+.card-footer {
+    color: #0f766e;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 1.2rem;
+    padding-top: 0.8rem;
+}
+.card-header i {
+    font-size: 1.8rem; 
+    margin-right: 0.8rem; 
+    color: black;
+    position: relative;
+    top: 0.5px;
+
+}
+.card-custom:hover {
+    box-shadow: 0 10px 15px #d1f3ed;
+    border-color: #d1f3ed ; /* gray-400 */
+  }
 
 body {
     font-family: 'Poppins', sans-serif !important;

@@ -3,23 +3,55 @@
         <a href="<?php echo site_url('admin/doctor'); ?>">
             <div class="tile-stats tile-white tile-white-primary">
                 <div class="icon"><i class="fa fa-user-md"></i></div>
-                <div class="num" data-start="0" data-end="<?php echo $this->db->count_all('doctor'); ?>"
-                     data-duration="1500" data-delay="0"><?php echo $this->db->count_all('doctor'); ?></div>
+                <div class="num" data-start="0" data-end="<?php echo $this->db->count_all('appointment'); ?>"
+                     data-duration="1500" data-delay="0"><?php echo $this->db->count_all('appointment'); ?></div>
                 <h3><?php echo get_phrase('doctor') ?></h3>
             </div>
         </a>
     </div>
 
     <div class="col-sm-3">
-        <a href="<?php echo site_url('admin/patient'); ?>">
-            <div class="tile-stats tile-white-red">
-                <div class="icon"><i class="fa fa-user"></i></div>
-                <div class="num" data-start="0" data-end="<?php echo $this->db->count_all('patient'); ?>" 
-                     data-duration="1500" data-delay="0"><?php echo $this->db->count_all('patient'); ?></div>
-                <h3><?php echo get_phrase('patient') ?></h3>
+    <a href="<?php echo site_url('admin/patient'); ?>" class="text-decoration-none">
+        <div class="card-custom">
+            <!-- Header with icon and title -->
+            <div class="card-header">
+                <i class="fa fa-user-circle card-icon"></i>
+                <span><?php echo get_phrase('total_patients'); ?></span>
             </div>
-        </a>
-    </div>
+
+            <!-- Main content row -->
+            <div class="card-main">
+                <!-- Patient count -->
+                <div class="card-count">
+                    <?php echo $total_patients; ?>  <!-- Use $total_patients from controller -->
+                </div>
+
+                <!-- Percentage badge -->
+                <span class="card-badge">
+                    <?php
+                    // Display "+" if the percentage change is positive
+                    $percentage_sign = ($percentage_change >= 0) ? '+' : '';
+                    echo $percentage_sign . $percentage_change . '%'; // Use $percentage_change from controller
+                    ?>
+                </span>
+            </div>
+
+            <!-- "More than yesterday" text -->
+            <div class="card-footer">
+                <?php
+                // Display "more" or "less" based on the patient difference
+                $more_or_less = ($patient_difference >= 0) ? 'more' : 'less';
+                $abs_difference = abs($patient_difference); // Get the absolute value
+                echo $abs_difference . ' ' . $more_or_less . ' than yesterday'; // Use $patient_difference from controller
+                ?>
+            </div>
+        </div>
+    </a>
+</div>
+
+
+
+
 
     <div class="col-sm-3">
         <a href="<?php echo site_url('admin/nurse'); ?>">
