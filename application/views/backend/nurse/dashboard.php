@@ -19,13 +19,10 @@
     </div>
 </div>
 
-
 <script type="text/javascript">
     
     $(document).ready(function()
     {
-        var calendar = $('#notice_calendar');
-				
         $('#notice_calendar').fullCalendar
         ({
             header:
@@ -39,25 +36,31 @@
             height: 530,
             droppable: false,
 
-            events:
-            [
+            events: [
                 <?php
-                $notices   = $this->db->get('notice')->result_array();
+                $notices = $this->db->get('notice')->result_array();
                 foreach ($notices as $row):
+                    // Prepare event data for JSON encoding
+                    $event = [
+                        'title' => $row['title'],
+                        'start' => date('Y-m-d', $row['start_timestamp']),
+                        'end' => date('Y-m-d', $row['end_timestamp']),
+                        'allDay' => true,
+                        'description' => $row['description']
+                    ];
+                    echo json_encode($event, JSON_UNESCAPED_UNICODE);
+                    echo ",";
+                endforeach;
                 ?>
-                    {
-                        title   :   "<?php echo $title = $this->db->get_where('notice' , 
-                                        array('notice_id' => $row['notice_id'] ))->row()->title;?>",
-                        start   :   new Date(<?php echo date('Y', $row['start_timestamp']); ?>, 
-                                        <?php echo date('m', $row['start_timestamp']) - 1; ?>, 
-                                        <?php echo date('d', $row['start_timestamp']); ?>),
-                        end     :   new Date(<?php echo date('Y', $row['end_timestamp']); ?>, 
-                                        <?php echo date('m', $row['end_timestamp']) - 1; ?>, 
-                                        <?php echo date('d', $row['end_timestamp']); ?>),
-                        allDay: true
-                    },
-                <?php endforeach ?>
-            ]
+            ],
+
+            eventClick: function(calEvent) {
+                if (calEvent.description) {
+                    alert(calEvent.title + "\n\n" + calEvent.description);
+                } else {
+                    alert(calEvent.title);
+                }
+            }
         });
     });
 </script>

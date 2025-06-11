@@ -55,6 +55,13 @@ class Admin extends CI_Controller
         // Total patients (existing)
         $page_data['total_patients'] = $this->db->count_all('patient');
     
+        // Total appointments
+        $page_data['total_appointments'] = $this->db->count_all('appointment');
+    
+        // Total invoices
+        $page_data['total_invoices'] = $this->db->count_all('invoice');
+        $page_data['total_tests'] = $this->db->count_all('pathology_report');
+    
         // Current day
         $current_day_start = date('Y-m-d 00:00:00');
         $current_day_end = date('Y-m-d 23:59:59');
@@ -75,22 +82,167 @@ class Admin extends CI_Controller
             ->where('created_at <=', $previous_day_end)
             ->count_all_results('patient');
     
-        // Calculate difference
+        // Calculate patient difference
         $page_data['patient_difference'] = $page_data['current_day_count'] - $page_data['previous_day_count'];
     
-        // Calculate percentage change (with zero-division protection)
+        // Calculate patient percentage change (with zero-division protection)
         $page_data['percentage_change'] = ($page_data['previous_day_count'] > 0)
             ? (round(($page_data['patient_difference'] / $page_data['previous_day_count']) * 100, 1))
             : ($page_data['current_day_count'] > 0 ? 100 : 0);
     
-        $page_data['page_name'] = 'dashboard';
-        $page_data['page_title'] = get_phrase('admin_dashboard');
+        // Appointments in current day
+        $current_day_appointments = $this->db
+            ->where('created_at >=', $current_day_start)
+            ->where('created_at <=', $current_day_end)
+            ->count_all_results('appointment');
     
-        $this->load->view('backend/index', $page_data);
+        // Appointments in previous day
+        $previous_day_appointments = $this->db
+            ->where('created_at >=', $previous_day_start)
+            ->where('created_at <=', $previous_day_end)
+            ->count_all_results('appointment');
+    
+        // Calculate appointment difference
+        $page_data['appointment_difference'] = $current_day_appointments - $previous_day_appointments;
+    
+        // Calculate appointment percentage change (with zero-division protection)
+        $page_data['appointment_percentage_change'] = ($previous_day_appointments > 0)
+            ? (round(($page_data['appointment_difference'] / $previous_day_appointments) * 100, 1))
+            : ($current_day_appointments > 0 ? 100 : 0);
+    
+        // Pass appointment data to the view
+        $page_data['current_day_appointments'] = $current_day_appointments;
+        $page_data['previous_day_appointments'] = $previous_day_appointments;
+    
+        // Invoices in current day
+$current_day_invoices = $this->db
+->where('created_at >=', $current_day_start)
+->where('created_at <=', $current_day_end)
+->count_all_results('invoice');
+
+// Invoices in previous day
+$previous_day_invoices = $this->db
+->where('created_at >=', $previous_day_start)
+->where('created_at <=', $previous_day_end)
+->count_all_results('invoice');
+
+// Calculate invoice difference
+$invoice_difference = $current_day_invoices - $previous_day_invoices;
+
+// Calculate invoice percentage change (with zero-division protection)
+$invoice_percentage_change = ($previous_day_invoices > 0)
+? (round(($invoice_difference / $previous_day_invoices) * 100, 1))
+: ($current_day_invoices > 0 ? 100 : 0);
+
+// Pass invoices data to the view
+$page_data['current_day_invoices'] = $current_day_invoices;
+$page_data['previous_day_invoices'] = $previous_day_invoices;
+$page_data['invoice_difference'] = $invoice_difference;
+$page_data['invoice_percentage_change'] = $invoice_percentage_change;
+
+        // Tests in current day
+        $current_day_tests = $this->db
+        ->where('created_at >=', $current_day_start)
+        ->where('created_at <=', $current_day_end)
+        ->count_all_results('pathology_report');
+        
+        // Tests in previous day
+        $previous_day_tests = $this->db
+        ->where('created_at >=', $previous_day_start)
+        ->where('created_at <=', $previous_day_end)
+        ->count_all_results('pathology_report');
+        
+        // Calculate invoice difference
+        $test_difference = $current_day_tests - $previous_day_tests;
+        
+        // Calculate invoice percentage change (with zero-division protection)
+        $test_percentage_change = ($previous_day_tests > 0)
+        ? (round(($test_difference / $previous_day_tests) * 100, 1))
+        : ($current_day_tests > 0 ? 100 : 0);
+        
+        // Pass invoice data to the view
+        $page_data['current_day_tests'] = $current_day_tests;
+        $page_data['previous_day_tests'] = $previous_day_tests;
+        $page_data['test_difference'] = $test_difference;
+        $page_data['test_percentage_change'] = $test_percentage_change;
+        
+        // Load helper in constructor if not loaded already
+$this->load->helper('json');
+
+// Initialize an array to hold daily income
+$daily_income = [];
+
+// Loop through the last 7 days
+for ($i = 6; $i >= 0; $i--) {
+    $date = date('Y-m-d', strtotime("-$i days")); // Get the date for the last 7 days
+    $invoices = $this->db->where('DATE(created_at)', $date)->get('invoice')->result_array(); // Fetch invoices for that date
+
+    $sum = 0; // Initialize sum for the day's income
+    foreach ($invoices as $invoice) {
+        $entries = json_decode($invoice['invoice_entries'], true); // Decode JSON
+
+        $entries_total = 0;
+        if (is_array($entries)) {
+            foreach ($entries as $entry) {
+                // Sum amount (convert string to float)
+                $entries_total += floatval($entry['amount']);
+            }
+        }
+        
+        // Calculate total for this invoice: entries total - discount + VAT
+        $discount = floatval($invoice['discount_amount']);
+        $vat = floatval($invoice['vat_percentage']);
+        $invoice_total = $entries_total - $discount + $vat;
+        
+        $sum += $invoice_total; // Add to the day's total
     }
     
-    
-    
+    $daily_income[$date] = round($sum, 2); // Store the total income for that day
+}
+
+// Pass daily income to the view
+$page_data['daily_income'] = $daily_income;
+
+// Calculate total income (if still needed)
+$total_income = array_sum($daily_income); // Sum of daily incomes
+$page_data['total_income'] = $total_income;
+
+// Define age groups
+$age_groups = [
+    '0-18' => 0,
+    '19-35' => 0,
+    '36-50' => 0,
+    '51-65' => 0,
+    '66+' => 0,
+];
+
+// Fetch all patients' ages
+$patients = $this->db->select('age')->get('patient')->result_array();
+
+foreach ($patients as $patient) {
+    $age = intval($patient['age']);
+    if ($age <= 18) {
+        $age_groups['0-18']++;
+    } elseif ($age <= 35) {
+        $age_groups['19-35']++;
+    } elseif ($age <= 50) {
+        $age_groups['36-50']++;
+    } elseif ($age <= 65) {
+        $age_groups['51-65']++;
+    } else {
+        $age_groups['66+']++;
+    }
+}
+
+// Pass to view
+$page_data['age_distribution'] = $age_groups;
+
+$page_data['page_name'] = 'dashboard';
+$page_data['page_title'] = get_phrase('admin_dashboard');
+
+$this->load->view('backend/index', $page_data);
+
+    }
     
     // LANGUAGE SETTINGS
     

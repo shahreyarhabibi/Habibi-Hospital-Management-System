@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/css/neon-theme.css');?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/css/neon-forms.css');?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/css/custom.css');?>">
+<script src="<?php echo base_url('assets/js/chartjs/chart.min.js'); ?>"></script>
+
 <!--<link rel="stylesheet" href="assets/css/skins/green.css">-->
 <?php if ($text_align == 'right-to-left') : ?>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/neon-rtl.css');?>">

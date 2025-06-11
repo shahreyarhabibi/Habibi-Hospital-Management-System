@@ -30,6 +30,7 @@
                 <td><?php echo date('d/m/Y', $row['birth_date']); ?></td>
                 <td><?php echo $row['age']?></td>
                 <td><?php echo $row['blood_group']?></td>
+                </td>
                 <td>
                     <a  onclick="showAjaxModal('<?php echo site_url('modal/popup/edit_patient/'.$row['patient_id']);?>');" 
                         class="btn btn-info btn-sm">

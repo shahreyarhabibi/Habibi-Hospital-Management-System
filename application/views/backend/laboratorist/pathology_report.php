@@ -25,7 +25,7 @@
                   <?php
                     $report_info = $this->db->get_where('pathology_report', array('patient_id' => $row['patient_id']))->result_array();
                     foreach ($report_info as $report):?>
-                    <a href="<?php echo site_url('uploads/pathology_reports/'.$report['pathology_report']);?>" target="_blank" style="color: #fff;" class="badge badge-secondary"><i class="fa fa-download" aria-hidden="true"></i> <?php echo $report['test_name']; ?></a><br>
+                    <a href="<?php echo base_url('uploads/pathology_reports/'.$report['pathology_report']);?>" target="_blank" style="color: #fff;" class="badge badge-secondary"><i class="fa fa-download" aria-hidden="true"></i> <?php echo $report['test_name']; ?></a><br>
                   <?php endforeach; ?>
                 </td>
                 <td>
