@@ -47,6 +47,22 @@ if ( ! function_exists('get_phrase'))
 	}
 }
 
+if ( ! function_exists('get_time_based_greeting')) {
+    function get_time_based_greeting() {
+        $hour = date('H'); // 24-hour format
+
+        if ($hour >= 5 && $hour < 12) {
+            return get_phrase('good_morning');
+        } elseif ($hour >= 12 && $hour < 17) {
+            return get_phrase('good_afternoon');
+        } elseif ($hour >= 17 && $hour < 21) {
+            return get_phrase('good_evening');
+        } else {
+            return get_phrase('good_night');
+        }
+    }
+}
+
 // ------------------------------------------------------------------------
 /* End of file language_helper.php */
 /* Location: ./system/helpers/language_helper.php */

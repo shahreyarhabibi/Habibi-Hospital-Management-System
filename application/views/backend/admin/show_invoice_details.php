@@ -5,7 +5,7 @@ foreach ($edit_data as $row):
     <div id="invoice_print">
         <table width="100%" border="0">
             <tr>
-                <td width="50%"><img src="uploads/logo.png" style="max-height:80px;"></td>
+                <td width="50%"><img src="../../uploads/logo.png" style="max-height:80px;"></td>
                 <td align="right">
                     <h4><?php echo get_phrase('invoice_number'); ?> : <?php echo $row['invoice_number']; ?></h4>
                     <h5><?php echo get_phrase('issue_date'); ?> : <?php echo $row['creation_timestamp']; ?></h5>

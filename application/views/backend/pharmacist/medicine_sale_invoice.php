@@ -5,7 +5,7 @@ foreach ($edit_data as $row):
     <div id="invoice_print">
         <table width="100%" border="0">
             <tr>
-                <td width="50%"><img src="uploads/logo.png" style="max-height:80px;"></td>
+                <td width="50%"><img src="../../uploads/logo.png" style="max-height:80px;"></td>
                 <td align="right"></td>
             </tr>
         </table>

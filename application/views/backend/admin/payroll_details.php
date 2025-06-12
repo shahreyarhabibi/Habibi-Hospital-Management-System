@@ -12,7 +12,7 @@ foreach ($edit_data as $row):
     <div id="payroll_print">
         <table width="100%" border="0">
             <tr>
-                <td width="50%"><img src="uploads/logo.png" style="max-height:80px;"></td>
+                <td width="50%"><img src="../../uploads/logo.png" style="max-height:80px;"></td>
                 <td align="right">
                     <h4><?php echo get_phrase('payroll_code'); ?> : <?php echo $row['payroll_code']; ?></h4>
                     <h5><?php echo get_phrase('employee'); ?> : <?php echo $user->name; ?></h5>

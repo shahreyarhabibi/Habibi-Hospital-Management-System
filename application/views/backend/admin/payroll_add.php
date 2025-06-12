@@ -1,5 +1,3 @@
-<hr />
-
 <?php echo form_open(site_url('admin/payroll_selector')); ?>
 
     <div class="row">

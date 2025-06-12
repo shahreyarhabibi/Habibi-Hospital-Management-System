@@ -297,6 +297,33 @@ $this->load->view('backend/index', $page_data);
         $this->load->view('backend/index', $page_data);
     }
 
+    // Used to update the language directly from header
+    public function set_language()
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(site_url(), 'refresh');
+    
+        $language = $this->input->post('language');
+    
+        // Update language
+        $this->db->where('type', 'language');
+        $this->db->update('settings', ['description' => $language]);
+    
+        // Determine text_align based on language
+        if (strtolower($language) == 'persian' || strtolower($language) == 'pashto') {
+            $text_align = 'right-to-left';
+        } else {
+            $text_align = 'left-to-right';
+        }
+    
+        // Update text_align
+        $this->db->where('type', 'text_align');
+        $this->db->update('settings', ['description' => $text_align]);
+    
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+
+
     public function update_phrase_with_ajax() {
         $checker['phrase_id']                = $this->input->post('phraseId');
         $updater[$this->input->post('currentEditingLanguage')] = $this->input->post('updatedValue');

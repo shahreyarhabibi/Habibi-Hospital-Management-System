@@ -45,29 +45,6 @@
                     </div>
                 </div>
 
-                <!-- <div class="form-group">
-                    <label  class="col-sm-3 control-label"><?php echo get_phrase('paypal_email'); ?></label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="paypal_email"
-                               value="<?php echo $this->db->get_where('settings', array('type' => 'paypal_email'))->row()->description; ?>" required>
-                    </div>
-                </div> -->
-
-                <!-- <div class="form-group">
-                    <label  class="col-sm-3 control-label"><?php echo get_phrase('purchase_code'); ?></label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="purchase_code"
-                               value="<?php echo $this->db->get_where('settings', array('type' => 'purchase_code'))->row()->description; ?>" required>
-                    </div>
-                </div> -->
-
-                <div class="form-group">
-                    <label  class="col-sm-3 control-label"><?php echo get_phrase('currency'); ?></label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="currency"
-                               value="<?php echo $this->db->get_where('settings', array('type' => 'currency'))->row()->description; ?>" required>
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label  class="col-sm-3 control-label"><?php echo get_phrase('system_email'); ?></label>

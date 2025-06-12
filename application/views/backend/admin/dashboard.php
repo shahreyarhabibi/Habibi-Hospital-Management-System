@@ -1,9 +1,3 @@
-<?php
-// Debugging: Check the total income value
-echo "<script>console.log('Total Income: " . $total_income . "');</script>";
-?>
-
-
 <div class="row" id ="res-dash">
 <div class="col-sm-3">
         <div class="card-custom">
@@ -248,7 +242,7 @@ echo "<script>console.log('Total Income: " . $total_income . "');</script>";
 </div>
 
 <!-- Place this canvas below your cards in your dashboard view -->
-<div class="col-sm-6 graph-canvas" style="margin-top: 20px; padding: 0; margin-left:15px;transition: all 0.3s ease; border: 1px solid #b3b6b8; border-radius: 2rem;" >
+<div class="col-sm-6 graph-canvas" style="margin-top: 3.5rem; padding: 0; margin-left:15px;transition: all 0.3s ease; border: 1px solid #b3b6b8; border-radius: 2rem;" >
     <div style="background-color: white; border-radius: 2rem; padding: 20px;">
         <canvas id="incomeChart" width="450" height="300"></canvas>
     </div>
@@ -329,7 +323,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<div class="col-sm-6 graph-canvas" style="margin-top: 20px; padding:0; padding-top: 10px; margin-left: 15px; max-width: 570px; transition: all 0.3s ease; border: 1px solid #b3b6b8; border-radius: 2rem; background-color: white">
+<div class="col-sm-6 graph-canvas" style="margin-top: 3.5rem; padding:0; padding-top: 10px; margin-left: 15px; max-width: 570px; transition: all 0.3s ease; border: 1px solid #b3b6b8; border-radius: 2rem; background-color: white; margin-bottom:50px;">
     <h4 style="text-align: center; color: #6c757d; font-weight: 600; font-size:13px;">Patient Age Distribution</h4>
     <div style="background-color: white; border-radius: 2rem; padding:0px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); height: 298px; display: flex; justify-content: center; align-items: center;">
         <canvas id="ageDistributionChart" width="300" height="300" style="max-height: 90%; max-width: 100%;"></canvas> <!-- Adjusted width and height -->
@@ -398,115 +392,3 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
-
-
-
-
-    <div class="col-sm-3">
-        <a href="<?php echo site_url('admin/nurse'); ?>">
-            <div class="tile-stats tile-white-aqua">
-                <div class="icon"><i class="fa fa-plus-square"></i></div>
-                <div class="num" data-start="0" data-end="<?php echo $this->db->count_all('nurse'); ?>" 
-                     data-duration="1500" data-delay="0"><?php echo $this->db->count_all('nurse'); ?></div>
-                <h3><?php echo get_phrase('nurse') ?></h3>
-            </div>
-        </a>
-    </div>
-
-    <div class="col-sm-3">
-        <a href="<?php echo site_url('admin/pharmacist'); ?>">
-            <div class="tile-stats tile-white-blue">
-                <div class="icon"><i class="fa fa-medkit"></i></div>
-                <div class="num" data-start="0" data-end="<?php echo $this->db->count_all('pharmacist'); ?>" 
-                     data-duration="1500" data-delay="0"><?php echo $this->db->count_all('pharmacist'); ?></div>
-                <h3><?php echo get_phrase('pharmacist') ?></h3>
-            </div>
-        </a>
-    </div>
-</div>
-
-<br />
-
-<div class="row">
-    <div class="col-sm-3">
-        <a href="<?php echo site_url('admin/laboratorist'); ?>">
-            <div class="tile-stats tile-white-cyan">
-                <div class="icon"><i class="fa fa-user"></i></div>
-                <div class="num" data-start="0" data-end="<?php echo $this->db->count_all('laboratorist'); ?>" 
-                     data-duration="1500" data-delay="0"><?php echo $this->db->count_all('laboratorist'); ?></div>
-                <h3><?php echo get_phrase('laboratorist') ?></h3>
-            </div>
-        </a>
-    </div>
-
-    <div class="col-sm-3">
-        <a href="<?php echo site_url('admin/accountant'); ?>">
-            <div class="tile-stats tile-white-purple">
-                <div class="icon"><i class="fa fa-money"></i></div>
-                <div class="num" data-start="0" data-end="<?php echo $this->db->count_all('accountant'); ?>" 
-                     data-duration="1500" data-delay="0"><?php echo $this->db->count_all('accountant'); ?></div>
-                <h3><?php echo get_phrase('accountant') ?></h3>
-            </div>
-        </a>
-    </div>
-
-    <div class="col-sm-3">
-        <a href="<?php echo site_url('admin/payment_history'); ?>">
-            <div class="tile-stats tile-white-pink">
-                <div class="icon"><i class="fa fa-list-alt"></i></div>
-                <div class="num" data-start="0" data-end="<?php echo $this->db->count_all('invoice'); ?>" 
-                     data-duration="1500" data-delay="0"><?php echo $this->db->count_all('invoice'); ?></div>
-                <h3><?php echo get_phrase('payment') ?></h3>
-            </div>
-        </a>
-    </div>
-
-    <div class="col-sm-3">
-        <a href="<?php echo site_url('admin/medicine'); ?>">
-            <div class="tile-stats tile-white-orange">
-                <div class="icon"><i class="fa fa-medkit"></i></div>
-                <div class="num" data-start="0" data-end="<?php echo $this->db->count_all('medicine'); ?>" 
-                     data-duration="1500" data-delay="0"><?php echo $this->db->count_all('medicine'); ?></div>
-                <h3><?php echo get_phrase('medicine') ?></h3>
-            </div>
-        </a>
-    </div>
-</div>
-
-<br />
-
-<div class="row">
-    <div class="col-sm-3">
-        <a href="<?php echo site_url('admin/operation_report'); ?>">
-            <div class="tile-stats tile-white-green">
-                <div class="icon"><i class="fa fa-wheelchair"></i></div>
-                <div class="num" data-start="0" data-end="<?php echo count($this->db->get_where('report', array('type' => 'operation'))->result_array());?>" 
-                     data-duration="1500" data-delay="0"></div>
-                <h3><?php echo get_phrase('operation_report') ?></h3>
-            </div>
-        </a>
-    </div>
-
-    <div class="col-sm-3">
-        <a href="<?php echo site_url('admin/birth_report'); ?>">
-            <div class="tile-stats tile-white-brown">
-                <div class="icon"><i class="fa fa-github-alt"></i></div>
-                <div class="num" data-start="0" data-end="<?php echo count($this->db->get_where('report', array('type' => 'birth'))->result_array());?>" 
-                     data-duration="1500" data-delay="0"></div>
-                <h3><?php echo get_phrase('birth_report') ?></h3>
-            </div>
-        </a>
-    </div>
-
-    <div class="col-sm-3">
-        <a href="<?php echo site_url('admin/death_report'); ?>">
-            <div class="tile-stats tile-white-plum">
-                <div class="icon"><i class="fa fa-ban"></i></div>
-                <div class="num" data-start="0" data-end="<?php echo count($this->db->get_where('report', array('type' => 'death'))->result_array());?>" 
-                     data-duration="1500" data-delay="0"></div>
-                <h3><?php echo get_phrase('death_report') ?></h3>
-            </div>
-        </a>
-    </div>
-
-</div>

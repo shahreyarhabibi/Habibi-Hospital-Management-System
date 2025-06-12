@@ -3,6 +3,52 @@
  * Apply Here your Custom CSS
  *
 */
+
+#system-name{
+    font-weight:100; margin:0px;
+    color: #26A69A;
+    margin-bottom:10px;
+    font-family: 'poppins light'
+}
+
+.language-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.language-dropdown {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.language-dropdown:hover {
+    border-color: #999;
+}
+
+.language-dropdown:focus {
+    border-color: #26A69A;
+    outline: none;
+    box-shadow: 0 0 5px #26a69969
+}
+
+.language-dropdown option {
+    color: #333;
+}
+
+
 .card-custom {
     width: 100%;
     border-radius: 2rem;
@@ -10,6 +56,7 @@
     padding: 1.5rem;
     transition: all 0.3s ease;
     background-color: white;
+    margin-top:2rem
 }
 
 .card-header {
@@ -218,53 +265,70 @@ body {
 .page-container .sidebar-menu #main-menu li {
     border: 0;
 }
+
 .page-container .sidebar-menu #main-menu li a {
-    display: block;
-    padding: 10px 15px;
-    color: black;
-    margin: 5px 10px; /* creates space on left/right */
+    display: block; 
+    padding: 12px 18px; /* Increased padding for better touch targets */
+    color: #404040; /* Dark gray text color for readability */
+    margin: 5px; /* Space between list items */
     text-decoration: none;
-    border-radius: 0 20px 20px 0;
-    transition: all 0.3s ease;
-}
-
-.page-container .sidebar-menu #main-menu li a:hover,
-.page-container .sidebar-menu #main-menu li.active > a {
-    background-color: #d1f3ed !important; /* soft mint background */
-    color: #0f766e !important; /* dark teal */
+    border-radius: 8px; /* Slightly rounded corners for modern look */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+    font-family: 'poppins';
     font-weight: 600;
-    border-left: 4px solid #0f766e; /* indicator */
-    margin-left: 10px;
-    margin-right: 10px;
-    border-radius: 0 20px 20px 0;
+
 }
-.page-container .sidebar-menu #main-menu li a:hover i,
+
+.page-container .sidebar-menu #main-menu li a:hover{
+    background-color: #e0f7fa !important; /* Light cyan background */
+    color: #00796b !important; /* Dark teal for active state */
+    font-weight: 600; /* Normal font weight for a cleaner look */
+}
+.page-container .sidebar-menu #main-menu li.active > a {
+    background-color: #00796b !important; /* Light cyan background */
+    color: #e0f7fa !important; /* Dark teal for active state */
+    font-weight: 700; /* Normal font weight for a cleaner look */
+}
+
+.page-container .sidebar-menu #main-menu li a:hover i {
+    color: #00796b !important; /* Dark teal for icons on hover/active */
+
+}
 .page-container .sidebar-menu #main-menu li.active > a i {
-    color: #0f766e !important;
+    color: #e0f7fa !important; /* Dark teal for icons on hover/active */
 }
-
-
-
 
 .page-container .sidebar-menu #main-menu li.has-sub ul,
-.page-container .sidebar-menu #main-menu li.has-sub ul a{
-    background-color: #ffffff !important;
+.page-container .sidebar-menu #main-menu li.has-sub ul a {
+    background-color: #ffffff !important; /* White background for sub-menu */
 }
-.page-container .sidebar-menu #main-menu li.has-sub ul li.active a,
-.page-container .sidebar-menu #main-menu li.has-sub ul a:hover{
-    background-color: #d1f3ed !important;
+
+.page-container .sidebar-menu #main-menu li.has-sub ul li.active a
+{
+    background-color: #00796b !important; /* Light cyan background */
+    color: #e0f7fa !important; /* Dark teal for active state */
+    font-weight: 700;
 }
+.page-container .sidebar-menu #main-menu li.has-sub ul a:hover {
+    background-color: #e0f7fa !important; /* Light cyan background */
+    color: #00796b !important; /* Dark teal for active state */
+    font-weight: 600; /* Normal font weight for a cleaner look */}
+
 .page-container .sidebar-menu #main-menu li.has-sub ul,
-.page-container .sidebar-menu #main-menu li.has-sub ul li{
+.page-container .sidebar-menu #main-menu li.has-sub ul li {
     border: 0;
 }
+
 .page-container .sidebar-menu #main-menu li a i {
-    color: #525672;
-    margin-right: 12px;
+    color: #757575; /* Slightly darker gray for icons */
+    margin-right: 15px; /* Adequate space between icon and text */
 }
+
 
 body .page-container .sidebar-menu {
     background-color: #FFFFFF !important;
+    border-right: 3px solid #80808033;
+
 }
 body .sui-normal #user-name-welcome,#welcome-text{
     color: #525672 ;

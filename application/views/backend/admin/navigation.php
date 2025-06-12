@@ -29,7 +29,7 @@
             <a href="#" class="user-link">
                 <img src="<?php echo $this->crud_model->get_image_url($this->session->userdata('login_type'), $this->session->userdata('login_user_id'));?>" alt="" class="img-circle" style="height:60px;">
 
-                <span id="welcome-text"><?php echo get_phrase('welcome'); ?>,</span>
+                <span id="welcome-text"><?php echo get_time_based_greeting(); ?>,</span>
                 <strong id = "user-name-welcome"><?php
                     echo $this->db->get_where($this->session->userdata('login_type'), array($this->session->userdata('login_type') . '_id' =>
                         $this->session->userdata('login_user_id')))->row()->name;
@@ -61,14 +61,14 @@
         <!-- DASHBOARD -->
         <li class="<?php if ($page_name == 'dashboard') echo 'active'; ?> ">
             <a href="<?php echo site_url('admin/dashboard');?>">
-                <i class="fa fa-desktop"></i>
+                <i class="fa fa-th-large"></i>
                 <span><?php echo get_phrase('dashboard'); ?></span>
             </a>
         </li>
 
         <li class="<?php if ($page_name == 'manage_department' || $page_name == 'department_facilities') echo 'active'; ?> ">
             <a href="<?php echo site_url('admin/department');?>">
-                <i class="fa fa-sitemap"></i>
+                <i class="fa fa-building-o"></i>
                 <span><?php echo get_phrase('department'); ?></span>
             </a>
         </li>
@@ -82,7 +82,7 @@
 
         <li class="<?php if ($page_name == 'manage_patient') echo 'active'; ?> ">
             <a href="<?php echo site_url('admin/patient');?>">
-                <i class="fa fa-user"></i>
+                <i class="fa fa-user-o"></i>
                 <span><?php echo get_phrase('patient'); ?></span>
             </a>
         </li>
@@ -103,21 +103,21 @@
 
         <li class="<?php if ($page_name == 'manage_laboratorist') echo 'active'; ?> ">
             <a href="<?php echo site_url('admin/laboratorist');?>">
-                <i class="fa fa-user"></i>
+                <i class="fa fa-flask"></i>
                 <span><?php echo get_phrase('laboratorist'); ?></span>
             </a>
         </li>
 
         <li class="<?php if ($page_name == 'manage_accountant') echo 'active'; ?> ">
             <a href="<?php echo site_url('admin/accountant');?>">
-                <i class="fa fa-money"></i>
+                <i class="fa fa-calculator"></i>
                 <span><?php echo get_phrase('accountant'); ?></span>
             </a>
         </li>
 
         <li class="<?php if ($page_name == 'manage_receptionist') echo 'active'; ?> ">
             <a href="<?php echo site_url('admin/receptionist');?>">
-                <i class="fa fa-plus-square"></i>
+                <i class="fa fa-female"></i>
                 <span><?php echo get_phrase('receptionist'); ?></span>
             </a>
         </li>
@@ -128,7 +128,7 @@
                             || $page_name == 'show_birth_report'    || $page_name == 'show_death_report')
                         echo 'opened active';?> ">
             <a href="#">
-                <i class="fa fa-sun-o"></i>
+                <i class="fa fa-desktop"></i>
                 <span><?php echo get_phrase('monitor_hospital'); ?></span>
             </a>
             <ul>
@@ -210,7 +210,7 @@
         
                 <li class="<?php if ($page_name == 'system_settings') echo 'active'; ?> ">
                     <a href="<?php echo site_url('admin/system_settings');?>">
-                        <span><i class="fa fa-h-square"></i> <?php echo get_phrase('system_settings'); ?></span>
+                        <span><i class="fa fa-cog"></i> <?php echo get_phrase('system_settings'); ?></span>
                     </a>
                 </li>
             

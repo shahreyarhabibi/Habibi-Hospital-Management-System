@@ -5,7 +5,14 @@ $text_align     = $this->db->get_where('settings', array('type' => 'text_align')
 $account_type   = $this->session->userdata('login_type');
 ?>
 <!DOCTYPE html>
-<html lang="en" dir="<?php if ($text_align == 'right-to-left') echo 'rtl'; ?>">
+<?php
+$CI =& get_instance();
+$CI->load->database();
+$text_align = $CI->db->get_where('settings', ['type' => 'text_align'])->row()->description;
+?>
+
+<html dir="<?php echo ($text_align == 'right-to-left') ? 'rtl' : 'ltr'; ?>">
+
     <head>
 
         <title><?php echo $page_title; ?> - <?php echo $system_title; ?></title>
@@ -29,14 +36,9 @@ $account_type   = $this->session->userdata('login_type');
 
                 <?php include 'header.php'; ?>
 
-                <h3 style="margin:20px 0px; color:#818da1; font-weight:200;">
-                    <i class="entypo-right-circled"></i>
-                    <?php echo $page_title; ?>
-                </h3>
+        
 
                 <?php include $account_type . '/' . $page_name . '.php'; ?>
-
-                <?php include 'footer.php'; ?>
 
             </div>
 
