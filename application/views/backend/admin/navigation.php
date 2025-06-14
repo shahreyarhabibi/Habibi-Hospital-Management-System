@@ -4,7 +4,7 @@
         <!-- logo -->
         <div class="logo" style="">
             <a href="<?php echo site_url('login'); ?>">
-                <img src="<?php echo base_url('uploads/logo.png');?>"  style="max-height:60px;"/>
+                <img src="<?php echo base_url('uploads/logo.png');?>"  style="max-height:50px;"/>
             </a>
         </div>
 
@@ -204,15 +204,6 @@
                 </li>
             </ul>
         </li>
-
-
-        <!-- SETTINGS -->
-        
-                <li class="<?php if ($page_name == 'system_settings') echo 'active'; ?> ">
-                    <a href="<?php echo site_url('admin/system_settings');?>">
-                        <span><i class="fa fa-cog"></i> <?php echo get_phrase('system_settings'); ?></span>
-                    </a>
-                </li>
             
         <!-- ACCOUNT -->
         <li class="<?php if ($page_name == 'manage_profile') echo 'active'; ?> ">

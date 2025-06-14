@@ -334,27 +334,6 @@ $this->load->view('backend/index', $page_data);
         echo $checker['phrase_id'].' '.$this->input->post('currentEditingLanguage').' '.$this->input->post('updatedValue');
     }
     
-    // SYSTEM SETTINGS
-    
-    function system_settings($param1 = '', $param2 = '', $param3 = '')
-    {
-        if ($this->session->userdata('admin_login') != 1) {
-            $this->session->set_userdata('last_page', current_url());
-            redirect(site_url(), 'refresh');
-        }
-        
-        if ($param1 == 'do_update') {
-            $this->crud_model->update_system_settings();
-            $this->session->set_flashdata('message', get_phrase('settings_updated'));
-            redirect(site_url('admin/system_settings'), 'refresh');
-        }
-        
-        $page_data['page_name']  = 'system_settings';
-        $page_data['page_title'] = get_phrase('system_settings');
-        $page_data['settings']   = $this->db->get('settings')->result_array();
-        $this->load->view('backend/index', $page_data);
-    }
-    
     /*     * ****MANAGE OWN PROFILE AND CHANGE PASSWORD** */
     
     function manage_profile($param1 = '', $param2 = '', $param3 = '')

@@ -53,14 +53,23 @@
     $(".html5editor").wysihtml5();
 </script>
 
-<?php if ($this->session->flashdata('message') != ""){ ?>
-    <script>
-        toastr.info('<?php echo $this->session->flashdata('message');?>');
-    </script>
-<?php } ?>
+<?php
+$msg = $this->session->flashdata('message');
+$err = $this->session->flashdata('error_message');
 
-<?php if ($this->session->flashdata('error_message') != null){ ?>
+if ($msg): ?>
     <script>
-        toastr.error('<?php echo $this->session->flashdata('error_message');?>');
+        toastr.info('<?php echo addslashes($msg); ?>');
     </script>
-<?php } ?>
+<?php endif; ?>
+
+<?php if ($err): ?>
+    <script>
+        toastr.error('<?php echo addslashes($err); ?>');
+    </script>
+<?php endif; ?>
+
+<?php
+// Force flashdata cleanup
+$this->session->unset_userdata('__ci_vars');
+?>

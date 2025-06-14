@@ -33,20 +33,19 @@
 
     <div class="wrapper">
 
-        <section class="gray-bg height-100vh d-flex align-items-center page-section-ptb ">
+        <section class="height-100vh d-flex align-items-center page-section-ptb login-page-bg">
             <div class="container">
                 <div class="row no-gutters justify-content-center">
-                    <div class="col-lg-4 col-md-6 login-fancy-bg bg-overlay-black-0" style="background: url('<?php echo base_url('assets/login_page/img/bg.jpg'); ?>');">
+                    <div class="col-lg-4 col-md-6 login-side-img">
                         <div class="login-fancy pos-r d-flex">
                             <div class="text-center w-100 align-self-center">
-                                <img src="<?php echo base_url('assets/login_page/img/bg.png');?>" height="80" />
-                                <h2 class="text-white mb-20"><?php echo $this->db->get_where('settings', array('type' => 'system_name'))->row()->description; ?></h2>
+                                <img src="<?php echo base_url('assets/login_page/img/bg.png');?>" height="100" />
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 white-bg">
                         <div class="login-fancy pb-40 clearfix" id = "login_area">
-                            <h3 class="mb-30"><?php echo get_phrase('login'); ?></h3>
+                            <h3 class="mb-30"><?php echo get_phrase('welcome-to-habibi-hospital'); ?></h3>
                             <form class="" action="<?php echo site_url('login/do_login');?>" method="post">
                                 <div class="section-field mb-20">
                                     <label class="mb-10" for="name"><?php echo get_phrase('email'); ?>* </label>
@@ -56,34 +55,9 @@
                                     <label class="mb-10" for="Password"><?php echo get_phrase('password'); ?>* </label>
                                     <input id="Password" class="Password form-control" type="password" placeholder="<?php echo get_phrase('password'); ?>" name="password" required>
                                 </div>
-                                <button type="submit" class="btn btn-success"><?php echo get_phrase('login'); ?></button>
+                                <button type="submit" class="btn" style="background-color:#0f766e; color:white;"><?php echo get_phrase('login'); ?></button>
                             </form>
 
-                            <div class="section-field">
-                                <div class="remember-checkbox mb-30">
-                                    <a href="#" class="float-right" id = "forgot_password_button" onclick="toggleView(this)" style="color: black;"><?php echo get_phrase('forgot_password'); ?></a>
-
-                                    <!-- <a href="<?php echo base_url();?>" class="float-left" style="color: black;">
-                                        <i class="entypo-left-open"></i><?php echo get_phrase('back_to_website'); ?></a> -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="login-fancy pb-40 clearfix" id = "forgot_password_area" style="display: none;">
-                            <h3 class="mb-30"><?php echo get_phrase('forgot_password'); ?></h3>
-                            <form class="" action="<?php echo site_url('login/reset_password'); ?>" method="post">
-                                <div class="section-field mb-20">
-                                    <label class="mb-10" for="name"><?php echo get_phrase('email'); ?>* </label>
-                                    <input id="forgot_password_email" class="web form-control" type="email" placeholder="<?php echo get_phrase('email'); ?>" name="email" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary"><?php echo get_phrase('send_mail'); ?></button>
-                            </form>
-
-                            <div class="section-field">
-                                <div class="remember-checkbox mb-30">
-                                    <a href="#" class="float-right" id = "login_button" onclick="toggleView(this)" style="color: black;"><?php echo get_phrase('back_to_login'); ?>?</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -95,26 +69,28 @@
     <!-- jquery -->
     <script src="<?php echo base_url('assets/login_page/js/jquery-3.3.1.min.js'); ?>"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script type="text/javascript">
-        function toggleView(elem) {
-            if (elem.id === 'forgot_password_button') {
-                $('#login_area').hide();
-                $('#forgot_password_area').show();
-            }else if (elem.id === 'login_button') {
-                $('#login_area').show();
-                $('#forgot_password_area').hide();
-            }
-        }
 
+<?php
+$msg = $this->session->flashdata('message');
+$err = $this->session->flashdata('error_message');
+
+if ($msg): ?>
+    <script>
+        toastr.info('<?php echo addslashes($msg); ?>');
     </script>
+<?php endif; ?>
 
-    <?php if ($this->session->flashdata('error_message') != ""):?>
-
-    <script type="text/javascript">
-        toastr.error('<?php echo $this->session->flashdata("error_message");?>');
+<?php if ($err): ?>
+    <script>
+        toastr.error('<?php echo addslashes($err); ?>');
     </script>
+<?php endif; ?>
 
-    <?php endif;?>
+<?php
+// Force flashdata cleanup
+$this->session->unset_userdata('__ci_vars');
+?>
+
 </body>
 </html>
 

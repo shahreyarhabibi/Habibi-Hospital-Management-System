@@ -242,7 +242,7 @@
 </div>
 
 <!-- Place this canvas below your cards in your dashboard view -->
-<div class="col-sm-6 graph-canvas" style="margin-top: 3.5rem; padding: 0; margin-left:15px;transition: all 0.3s ease; border: 1px solid #b3b6b8; border-radius: 2rem;" >
+<div class="col-sm-6 graph-canvas" style="margin-top: 3.5rem; padding: 0; margin-left:15px;transition: all 0.3s ease; border: 1px solid #b3b6b8; border-radius: 2rem;" id="dashboard-graphs" >
     <div style="background-color: white; border-radius: 2rem; padding: 20px;">
         <canvas id="incomeChart" width="450" height="300"></canvas>
     </div>
@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
         data: {
             labels: labels,
             datasets: [{
-                label: 'Daily Income',
+                label: "<?php echo get_phrase('daily_income'); ?>",
                 data: dataPoints,
                 fill: true,
                 backgroundColor: '#d1f3ed',
@@ -323,8 +323,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<div class="col-sm-6 graph-canvas" style="margin-top: 3.5rem; padding:0; padding-top: 10px; margin-left: 15px; max-width: 570px; transition: all 0.3s ease; border: 1px solid #b3b6b8; border-radius: 2rem; background-color: white; margin-bottom:50px;">
-    <h4 style="text-align: center; color: #6c757d; font-weight: 600; font-size:13px;">Patient Age Distribution</h4>
+<div class="col-sm-6 graph-canvas" style="margin-top: 3.5rem; padding:0; padding-top: 10px; margin-left: 15px; max-width: 570px; transition: all 0.3s ease; border: 1px solid #b3b6b8; border-radius: 2rem; background-color: white; margin-bottom:50px;" id="dashboard-graphs">
+    <h4 style="text-align: center; color: #6c757d; font-weight: 600; font-size:13px;"><?php echo get_phrase('patient_age_distribution') ?></h4>
     <div style="background-color: white; border-radius: 2rem; padding:0px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); height: 298px; display: flex; justify-content: center; align-items: center;">
         <canvas id="ageDistributionChart" width="300" height="300" style="max-height: 90%; max-width: 100%;"></canvas> <!-- Adjusted width and height -->
     </div>

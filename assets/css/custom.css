@@ -135,6 +135,19 @@
 margin-right: 15px;
 margin-top: 0px !important;
 }
+#header-top-flex > div{
+display: none !important;
+overflow: hidden !important;
+}
+#header-top-flex{
+    justify-content: space-between;
+}
+#dashboard-graphs{
+    margin: 0.5rem !important;
+}
+.card-custom{
+    margin: 0px !important;
+}
 }
   
 body {

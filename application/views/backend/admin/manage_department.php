@@ -24,10 +24,6 @@
                 <td><?php echo $row['name']; ?></td>
                 <td><?php echo substr($row['description'], 0, 200); ?> ...</td>
                 <td>
-                    <a href="<?php echo site_url('admin/department_facilities/'.$row['department_id']);?>"
-                        class="btn btn-default btn-sm">
-                        <i class="fa fa-plus"></i>&nbsp;<?php echo get_phrase('manage_facilities');?>
-                    </a>
                     <a  onclick="showAjaxModal('<?php echo site_url('modal/popup/edit_department/'.$row['department_id']); ?>');" 
                         class="btn btn-info btn-sm">
                         <i class="fa fa-pencil"></i>&nbsp;<?php echo get_phrase('edit');?>
