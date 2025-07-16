@@ -167,6 +167,44 @@ class Login extends CI_Controller
         
         return 'invalid';
     }
+
+     /*     * *RESET AND SEND PASSWORD TO REQUESTED EMAIL*** */
+    
+    function forgot_password()
+    {
+        $this->load->view('backend/forgot_password');
+    }
+
+    function reset_password() {
+    $email = $this->input->post('email');
+    $new_password = substr(md5(rand(100000000, 20000000000)), 0, 7);
+    $reset_account_type = '';
+
+    // Check all user tables (admin, doctor, patient, etc.)
+    $tables = ['admin', 'doctor', 'patient', 'nurse', 'pharmacist', 'laboratorist', 'accountant', 'receptionist'];
+    
+    foreach ($tables as $table) {
+        $query = $this->db->get_where($table, ['email' => $email]);
+        if ($query->num_rows() > 0) {
+            $reset_account_type = $table;
+            $this->db->where('email', $email);
+            $this->db->update($table, ['password' => sha1($new_password)]);
+            break; // Exit loop once found
+        }
+    }
+
+    if ($reset_account_type != '') {
+        // Display password on the page instead of emailing
+        $this->session->set_flashdata('success_message', 
+            'Password reset! <strong>New Password: ' . $new_password . '</strong>');
+        redirect(site_url('Login/forgot_password'), 'refresh');
+    } else {
+        // Show error on the same page without redirecting
+        $this->session->set_flashdata('error_message', 'Email not found.');
+        // Reload the current view with error
+        $this->load->view('backend/login'); // Make sure this matches your view path
+    }
+}
     
     /*     * *****LOGOUT FUNCTION ****** */
     

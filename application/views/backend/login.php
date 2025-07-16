@@ -58,6 +58,31 @@
                                 <button type="submit" class="btn" style="background-color:#0f766e; color:white;"><?php echo get_phrase('login'); ?></button>
                             </form>
 
+                            <div class="section-field">
+                                <div class="remember-checkbox mb-30">
+                                    <a href="#" class="float-right" id = "forgot_password_button" onclick="toggleView(this)" style="color: black;"><?php echo get_phrase('forgot_password'); ?></a>
+
+                                    <!-- <a href="<?php echo base_url();?>" class="float-left" style="color: black;">
+                                        <i class="entypo-left-open"></i><?php echo get_phrase('back_to_website'); ?></a> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="login-fancy pb-40 clearfix" id = "forgot_password_area" style="display: none;">
+                            <h3 class="mb-30"><?php echo get_phrase('forgot_password'); ?></h3>
+                            <form class="" action="<?php echo site_url('login/reset_password'); ?>" method="post">
+                                <div class="section-field mb-20">
+                                    <label class="mb-10" for="name"><?php echo get_phrase('email'); ?>* </label>
+                                    <input id="forgot_password_email" class="web form-control" type="email" placeholder="<?php echo get_phrase('email'); ?>" name="email" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><?php echo get_phrase('send_mail'); ?></button>
+                            </form>
+
+                            <div class="section-field">
+                                <div class="remember-checkbox mb-30">
+                                    <a href="#" class="float-right" id = "login_button" onclick="toggleView(this)" style="color: black;"><?php echo get_phrase('back_to_login'); ?>?</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -66,10 +91,21 @@
     </div>
 
 
+
     <!-- jquery -->
     <script src="<?php echo base_url('assets/login_page/js/jquery-3.3.1.min.js'); ?>"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
+    <script type="text/javascript">
+        function toggleView(elem) {
+            if (elem.id === 'forgot_password_button') {
+                $('#login_area').hide();
+                $('#forgot_password_area').show();
+            }else if (elem.id === 'login_button') {
+                $('#login_area').show();
+                $('#forgot_password_area').hide();
+            }
+        }
+        </script>
 <?php
 $msg = $this->session->flashdata('message');
 $err = $this->session->flashdata('error_message');
