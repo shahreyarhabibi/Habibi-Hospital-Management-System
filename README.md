@@ -34,7 +34,7 @@ The system is designed with multiple user roles to facilitate the workflow of me
    ```bash
    git clone https://github.com/yourusername/habibi-hms.git
    cd habibi-hms
-   ```
+  ```
 
 ````
 
@@ -98,14 +98,3 @@ This project does **not** currently have an open-source license applied. If you 
 
 Thanks to open-source tools like **CodeIgniter** and **Bootstrap**, this system was built to help streamline hospital operations and improve healthcare management.
 
----
-
-```
-
----
-
-Let me know if you want me to generate the `SQL` structure template, `.gitignore`, or a sample `config/database.php` as well.
-
-Also, if you ever decide to make it public or want to prepare for deployment, I can help with that too.
-```
-````
