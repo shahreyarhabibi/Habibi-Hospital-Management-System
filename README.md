@@ -35,7 +35,6 @@ The system is designed with multiple user roles to facilitate the workflow of me
    git clone https://github.com/yourusername/habibi-hms.git
    cd habibi-hms
   ```
-
 ````
 
 2. **Create a Database**:
